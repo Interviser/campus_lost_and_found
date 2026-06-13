@@ -2,10 +2,13 @@ const express = require('express');
 const cookieParser = require('cookie-parser');
 
 const app = express();
+const { connectDB } = require('./controllers/connectDB');
 const  {lostItemsRouter}= require('./routes/lostItemsRoutes');
 const { generateOTPRouter } = require('./routes/generateOTPRoute');
 const { authenticateRouter } = require('./routes/authenticationRoute');
 const { uploadLostItemsrouter } = require('./routes/uploadLostItemsRoute');
+
+connectDB();
 
 app.use(cookieParser());
 app.use(express.json());
