@@ -5,6 +5,7 @@ const app = express();
 const  {lostItemsRouter}= require('./routes/lostItemsRoutes');
 const { generateOTPRouter } = require('./routes/generateOTPRoute');
 const { authenticateRouter } = require('./routes/authenticationRoute');
+const { uploadLostItemsrouter } = require('./routes/uploadLostItemsRoute');
 
 app.use(cookieParser());
 app.use(express.json());
@@ -14,6 +15,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use('/api', lostItemsRouter);
 app.use('/api', authenticateRouter);
 app.use('/api', generateOTPRouter);
+app.use('/api', uploadLostItemsrouter);
 
 
 

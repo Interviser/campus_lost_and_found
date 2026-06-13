@@ -9,7 +9,13 @@ var stuEmail = ""
 const otpCache = new nodeCache({ stdTTL: 300 });
 
 const authenticateToken = (req, res) => {
+      
     stuEmail = req.body.stuEmail;
+    const uccEmail = stuEmail.split("@")[1].trim();
+    if(uccEmail && uccEmail !== "stu.ucc.edu.gh") {
+        return res.status(403).json({ message: "You are not authorized to take this action" });
+    }
+    
     if(!stuEmail) {
         return res.status(400).json({ message: "Student email is required" });
     }
@@ -23,8 +29,8 @@ const authenticateToken = (req, res) => {
    const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
-        user: 'samuelodoom149@gmail.com',
-        pass: 'rigm cevv wzmp xjmh'
+        user: process.env.USER,
+        pass: process.env.PASS
     }
 });
 
@@ -50,6 +56,8 @@ const mailOptions = {
         console.log("Error sending OTP email");
     }
 }
-    generateAndSendOTP(stuEmail, OTP);    
+    generateAndSendOTP(stuEmail, OTP);   
+    
+  
 }
 module.exports = { authenticateToken, otpCache, stuEmail };
