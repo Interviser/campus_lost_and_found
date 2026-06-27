@@ -7,6 +7,7 @@ const  {lostItemsRouter}= require('./routes/lostItemsRoutes');
 const { generateOTPRouter } = require('./routes/generateOTPRoute');
 const { authenticateRouter } = require('./routes/authenticationRoute');
 const { uploadLostItemsrouter } = require('./routes/uploadLostItemsRoute');
+const { adminLoginRouter } = require('./routes/adminLoginRoute');
 
 connectDB();
 
@@ -19,6 +20,7 @@ app.use('/api', lostItemsRouter);
 app.use('/api', authenticateRouter);
 app.use('/api', generateOTPRouter);
 app.use('/api', uploadLostItemsrouter);
+app.use('/api', adminLoginRouter);
 
 
 
